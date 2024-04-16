@@ -1,5 +1,6 @@
 package com.example.android
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
             //Intent
         }
         audioButton.setOnClickListener {
-            //Intent
+            val intent = Intent(this@MainActivity, AudioActivity::class.java)
+            startActivity(intent)
         }
     }
 }
