@@ -2,7 +2,10 @@ package com.example.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.core.app.ActivityCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,5 +14,15 @@ class MainActivity : AppCompatActivity() {
 
         ActivityCompat.requestPermissions(this, arrayOf("android.permission.RECORD_AUDIO"), 0)
 
+        val menuButton : View = findViewById(R.id.addMenu)
+        val videoButton : View = findViewById(R.id.fab_video)
+        val audioButton : View = findViewById(R.id.fab_audio)
+
+        videoButton.setOnClickListener {
+            //Intent
+        }
+        audioButton.setOnClickListener {
+            //Intent
+        }
     }
 }
