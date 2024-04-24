@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity() {
         val audioButton : View = findViewById(R.id.fab_audio)
 
         videoButton.setOnClickListener {
-            //Intent
+            val intent = Intent(this@MainActivity, VideoActivity::class.java)
+            startActivity(intent)
         }
         audioButton.setOnClickListener {
             val intent = Intent(this@MainActivity, AudioActivity::class.java)
