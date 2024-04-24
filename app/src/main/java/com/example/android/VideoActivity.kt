@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 class VideoActivity : AppCompatActivity() {
 
     private val REQUEST_VIDEO_CAPTURE = 101
+    private val PERMISSION_REQUEST_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,12 @@ class VideoActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             val videoUri: Uri? = data?.data
-            // Aquí puedes hacer algo con el vídeo grabado, si lo deseas
+            videoUri?.let {
+                // Aquí puedes mostrar el vídeo grabado en un reproductor de vídeo
+                val intent = Intent(Intent.ACTION_VIEW, videoUri)
+                intent.setDataAndType(videoUri, "video/*")
+                startActivity(intent)
+            }
         }
     }
 }
