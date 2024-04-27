@@ -13,7 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ActivityCompat.requestPermissions(this, arrayOf("android.permission.RECORD_AUDIO"), 0)
+        ActivityCompat.requestPermissions(this, arrayOf(
+            "Manifest.permission.RECORD_AUDIO",
+            "Manifest.permission.READ_EXTERNAL_STORAGE",
+            "Manifest.permission.WRITE_EXTERNAL_STORAGE",
+            "Manifest.permission.CAMERA"
+        ), 0)
 
         val menuButton : View = findViewById(R.id.addMenu)
         val videoButton : View = findViewById(R.id.fab_video)
