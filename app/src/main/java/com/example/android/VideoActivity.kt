@@ -11,12 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import android.os.Environment
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class VideoActivity : AppCompatActivity() {
 
     private val REQUEST_VIDEO_CAPTURE = 101
     private val PERMISSION_REQUEST_CODE = 100
     private val CAMERA_PERMISSION = Manifest.permission.CAMERA
+    private lateinit var currentVideoPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,27 @@ class VideoActivity : AppCompatActivity() {
         btnStopRecording.setOnClickListener {
             btnStartRecording.isEnabled = true
             btnStopRecording.visibility = Button.GONE
+            // Guardar la grabación
+            saveVideo()
+        }
+    }
+
+    private fun saveVideo() {
+        val file = createVideoFile()
+        val videoUri = Uri.fromFile(file)
+        currentVideoPath = file.absolutePath
+    }
+
+    private fun createVideoFile(): File {
+        // Nombre único para el archivo de video
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_MOVIES)
+        return File.createTempFile(
+            "VIDEO_${timeStamp}_",
+            ".mp4",
+            storageDir
+        ).apply {
+            currentVideoPath = absolutePath
         }
     }
 
