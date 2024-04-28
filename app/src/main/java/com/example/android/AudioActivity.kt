@@ -57,7 +57,7 @@ class AudioActivity : AppCompatActivity() {
 
     private fun getFilePath(): String {
         val dir : File ?=  getExternalFilesDir(null)
-        val file = File(dir, "audio" + numAudio + ".mp3")
+        val file = File(dir, "audio$numAudio.mp3")
         numAudio++
         return file.absolutePath
     }
