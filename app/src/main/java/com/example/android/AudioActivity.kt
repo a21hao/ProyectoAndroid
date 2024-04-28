@@ -21,6 +21,8 @@ class AudioActivity : AppCompatActivity() {
 
     private val REQUEST_MICROPHONE = 123
 
+    private var numAudio = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio)
@@ -66,7 +68,7 @@ class AudioActivity : AppCompatActivity() {
 
     private fun getFilePath(): String {
         val dir : File ?=  getExternalFilesDir(null)
-        val file = File(dir, "audio.mp3")
+        val file = File(dir, "audio" + numAudio + ".mp3")
         return file.absolutePath
     }
 
