@@ -10,32 +10,32 @@ import java.io.File
 import java.io.IOException
 
 class AudioRecorder {
-    private lateinit var mediaRecorder: MediaRecorder
+    /*private lateinit var mediaRecorder: MediaRecorder
     private lateinit var mediaPlayer: MediaPlayer
     private var isRecording = false
     private var doesAudioExist = false
 
-//    fun onCreate(savedInstanceState: Bundle?) {
-//
-//        val startButton: Button = findViewById(R.id.startButton)
-//        val stopButton: Button = findViewById(R.id.stopButton)
-//        val playButton: Button = findViewById(R.id.playButton)
-//
-//        startButton.setOnClickListener {
-//            startRecording()
-//        }
-//        stopButton.setOnClickListener {
-//            stopRecording()
-//        }
-//        playButton.setOnClickListener {
-//            playRecording()
-//        }
-//    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        val startButton: Button = findViewById(R.id.startButton)
+        val stopButton: Button = findViewById(R.id.stopButton)
+        val playButton: Button = findViewById(R.id.playButton)
+
+        startButton.setOnClickListener {
+            start()
+        }
+        stopButton.setOnClickListener {
+            stop()
+        }
+        playButton.setOnClickListener {
+            play()
+        }
+    }
 
     private fun getFilePath(): String {
-//        val dir : File =  getExternalFilesDir(null)
-//        val file = File(dir, "audio.mp3")
-//        return file.absolutePath
+        val dir : File =  getExternalFilesDir(null)
+        val file = File(dir, "audio.mp3")
+        return file.absolutePath
         return "FIX"
     }
 
@@ -94,5 +94,5 @@ class AudioRecorder {
     fun onDestroy() {
         mediaPlayer.release()
         mediaRecorder.release()
-    }
+    }*/
 }
