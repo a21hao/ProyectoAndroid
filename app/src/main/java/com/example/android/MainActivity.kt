@@ -3,6 +3,7 @@ package com.example.android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +47,11 @@ class MainActivity : AppCompatActivity() {
         loadAudioFiles()
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadAudioFiles()
+    }
+
     private fun loadAudioFiles() {
         audioFilesList.clear()
         val dir = getExternalFilesDir(null)
@@ -55,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         audioAdapter.notifyDataSetChanged()
+        Log.d("audios", audioFilesList.size.toString())
     }
 
     override fun onDestroy() {
