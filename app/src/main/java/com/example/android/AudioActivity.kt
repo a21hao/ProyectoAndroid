@@ -19,6 +19,8 @@ class AudioActivity : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
     private var isRecording = false
 
+    private var numAudio = 0
+
     private val REQUEST_MICROPHONE = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,11 +57,10 @@ class AudioActivity : AppCompatActivity() {
 
     private fun getFilePath(): String {
         val dir : File ?=  getExternalFilesDir(null)
-        val file = File(dir, "audio.mp3")
-        Log.d("path", file.absolutePath.toString())
+        val file = File(dir, "audio" + numAudio + ".mp3")
+        numAudio++
         return file.absolutePath
     }
-
     private fun startMediaRecorder() {
         try {
             mediaRecorder = MediaRecorder().apply {  }
