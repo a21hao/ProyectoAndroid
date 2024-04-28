@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Solicitar permisos
         ActivityCompat.requestPermissions(this, arrayOf(
             "Manifest.permission.RECORD_AUDIO",
             "Manifest.permission.READ_EXTERNAL_STORAGE",
@@ -39,17 +38,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        loadAudioFiles()
+
         recyclerView = findViewById(R.id.audioRecylerView)
         audioAdapter = AudioAdapter(audioFilesList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = audioAdapter
 
-        loadAudioFiles()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        loadAudioFiles()
     }
 
     private fun loadAudioFiles() {
@@ -57,10 +53,10 @@ class MainActivity : AppCompatActivity() {
         val dir = getExternalFilesDir(null)
         dir?.listFiles()?.forEach { file ->
             if (file.isFile && file.extension.equals("mp3", ignoreCase = true)) {
+                Log.d("add audio", "added")
                 audioFilesList.add(AudioFile(file.name, file.absolutePath))
             }
         }
-        audioAdapter.notifyDataSetChanged()
         Log.d("audios", audioFilesList.size.toString())
     }
 
