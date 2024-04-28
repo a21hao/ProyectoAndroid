@@ -117,7 +117,13 @@ class AudioActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
-        mediaRecorder.release()
+
+        if (::mediaPlayer.isInitialized) {
+            mediaPlayer.release()
+        }
+
+        if (::mediaRecorder.isInitialized) {
+            mediaRecorder.release()
+        }
     }
 }
