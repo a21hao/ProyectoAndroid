@@ -41,17 +41,6 @@ class AudioActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        sendAudioAMainActivity()
-    }
-
-    private fun sendAudioAMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("audioPath", getFilePath())
-        startActivity(intent)
-    }
-
     private fun checkAudioPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
