@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.IOException
 import android.Manifest.permission.RECORD_AUDIO
+import android.content.Intent
 import androidx.core.app.ActivityCompat
 
 class AudioActivity : AppCompatActivity() {
@@ -38,6 +39,17 @@ class AudioActivity : AppCompatActivity() {
         playButton.setOnClickListener {
             play()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        sendAudioAMainActivity()
+    }
+
+    private fun sendAudioAMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("audioPath", getFilePath())
+        startActivity(intent)
     }
 
     private fun checkAudioPermission() {
