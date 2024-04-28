@@ -3,6 +3,7 @@ package com.example.android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Solicitar permisos
         ActivityCompat.requestPermissions(this, arrayOf(
             "Manifest.permission.RECORD_AUDIO",
             "Manifest.permission.READ_EXTERNAL_STORAGE",
@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, AudioActivity::class.java)
             startActivity(intent)
         }
+
+        loadAudioFiles()
 
         recyclerView = findViewById(R.id.audioRecylerView)
         audioAdapter = AudioAdapter(audioFilesList)
@@ -62,10 +64,11 @@ class MainActivity : AppCompatActivity() {
         val dir = getExternalFilesDir(null)
         dir?.listFiles()?.forEach { file ->
             if (file.isFile && file.extension.equals("mp3", ignoreCase = true)) {
+                Log.d("add audio", "added")
                 audioFilesList.add(AudioFile(file.name, file.absolutePath))
             }
         }
-        audioAdapter.notifyDataSetChanged()
+        Log.d("audios", audioFilesList.size.toString())
     }
 
     private fun loadVideoFiles() {

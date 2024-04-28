@@ -16,7 +16,7 @@ import androidx.core.app.ActivityCompat
 
 class AudioActivity : AppCompatActivity() {
     private lateinit var mediaRecorder: MediaRecorder
-    private lateinit var mediaPlayer: MediaPlayer
+    //private lateinit var mediaPlayer: MediaPlayer
     private var isRecording = false
 
     private var numAudio = 0
@@ -57,7 +57,7 @@ class AudioActivity : AppCompatActivity() {
 
     private fun getFilePath(): String {
         val dir : File ?=  getExternalFilesDir(null)
-        val file = File(dir, "audio" + numAudio + ".mp3")
+        val file = File(dir, "audio$numAudio.mp3")
         numAudio++
         return file.absolutePath
     }
@@ -98,7 +98,7 @@ class AudioActivity : AppCompatActivity() {
     }
 
     private fun play() {
-        val filePath = getFilePath()
+        /*val filePath = getFilePath()
         val audioFile = File(filePath)
         if (!isRecording && audioFile.exists()) {
             try {
@@ -112,12 +112,12 @@ class AudioActivity : AppCompatActivity() {
         }
         else {
             Log.e("AudioRecorder", "The app is recording!!")
-        }
+        }*/
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
+        //mediaPlayer.release()
         mediaRecorder.release()
     }
 }
