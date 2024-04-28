@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityCompat
-import com.example.android.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_main)
 
         // Solicitar permisos
         ActivityCompat.requestPermissions(this, arrayOf(
