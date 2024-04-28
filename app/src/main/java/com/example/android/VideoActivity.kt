@@ -101,13 +101,8 @@ class VideoActivity : AppCompatActivity() {
         when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // Permiso concedido, puedes iniciar la grabación
                     dispatchTakeVideoIntent()
                 } else {
-                    // Permiso denegado, muestra un mensaje o realiza alguna acción adicional si es necesario
-                    // Por ejemplo, puedes mostrar un mensaje al usuario indicando que necesitas el permiso de cámara para grabar video.
-                    // También podrías deshabilitar la funcionalidad de grabación de video o cerrar la actividad.
-                    // Aquí un ejemplo de cómo mostrar un mensaje:
                     Toast.makeText(
                         this,
                         "Permiso de cámara necesario para grabar video",
@@ -115,9 +110,6 @@ class VideoActivity : AppCompatActivity() {
                     ).show()
                 }
                 return
-            }
-            else -> {
-                // Ignore all other requests.
             }
         }
     }
@@ -127,7 +119,6 @@ class VideoActivity : AppCompatActivity() {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             val videoUri: Uri? = data?.data
             videoUri?.let {
-                // Aquí puedes mostrar el vídeo grabado en un reproductor de vídeo
                 val intent = Intent(Intent.ACTION_VIEW, videoUri)
                 intent.setDataAndType(videoUri, "video/*")
                 startActivity(intent)

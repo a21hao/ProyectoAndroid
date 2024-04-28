@@ -13,6 +13,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var audioAdapter: AudioAdapter
     private val audioFilesList = mutableListOf<AudioFile>()
+    private lateinit var videoRecyclerView: RecyclerView
+    private lateinit var videoAdapter: VideoAdapter
+    private val videoFileList = mutableListOf<VideoFile>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,6 +48,18 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = audioAdapter
 
         loadAudioFiles()
+
+        videoList = listOf(
+            VideoFile("Video 1", "path_to_video_1"),
+            VideoFile("Video 2", "path_to_video_2"),
+            VideoFile("Video 3", "path_to_video_3")
+            // Añadir más videos según sea necesario
+        )
+
+        videoRecyclerView = findViewById(R.id.videoRecylerView)
+        videoAdapter = VideoAdapter(videoList)
+        videoRecyclerView.adapter = videoAdapter
+        videoRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun loadAudioFiles() {

@@ -1,55 +1,39 @@
 package com.example.android
 
 import android.media.MediaPlayer
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
 
-class AudioAdapter(private val audioFiles: List<VideoFile>) : RecyclerView.Adapter<AudioAdapter.AudioViewHolder>() {
-
-    private val mediaPlayerHolders: MutableList<AudioViewHolder> = mutableListOf()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AudioViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_audio, parent, false)
-        val holder = AudioViewHolder(view)
-        mediaPlayerHolders.add(holder)
-        return holder
+class VideoAdapter(private val videoFiles: List<VideoFile>) : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_video, parent, false)
+        return VideoViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: AudioViewHolder, position: Int) {
-        val audioFile = audioFiles[position]
-        holder.bind(audioFile)
+    override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
+        val videoFile = videoFiles[position]
+        holder.bind(videoFile)
     }
 
     override fun getItemCount(): Int {
-        return audioFiles.size
+        return videoFiles.size
     }
 
-    class AudioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var mediaPlayer: MediaPlayer? = null
+    inner class VideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val videoView: VideoView = itemView.findViewById(R.id.videoView)
 
-        fun bind(audioFile: VIdeoFile) {
-            itemView.findViewById<TextView>(R.id.textViewFileName).text = audioFile.name
-            itemView.findViewById<Button>(R.id.button).setOnClickListener{
-                mediaPlayer = MediaPlayer()
-                mediaPlayer?.setDataSource(audioFile.filePath)
-                mediaPlayer?.prepare()
-                mediaPlayer?.start()
-            }
-        }
+        fun bind(videoFile: VideoFile) {
+            // Set video URI to the VideoView
+            videoView.setVideoURI(Uri.parse(videoFile.filePath))
 
-        fun releaseMediaPlayer() {
-            mediaPlayer?.release()
-            mediaPlayer = null
-        }
-    }
-
-    fun releaseAllMediaPlayers() {
-        for (holder in mediaPlayerHolders) {
-            holder.releaseMediaPlayer()
+            // Handle video playback controls (play, pause, etc.) as needed
+            // You can add listeners here to control video playback
         }
     }
 }

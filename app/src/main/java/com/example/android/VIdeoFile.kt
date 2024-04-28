@@ -1,3 +1,3 @@
 package com.example.android
 
-data class VIdeoFile(val name: String, val filePath: String)
+data class VideoFile(val name: String, val filePath: String)
