@@ -19,6 +19,8 @@ class AudioActivity : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
     private var isRecording = false
 
+    private var numAudio = 0
+
     private val REQUEST_MICROPHONE = 123
 
     private var numAudio = 0
@@ -43,17 +45,6 @@ class AudioActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        sendAudioAMainActivity()
-    }
-
-    private fun sendAudioAMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("audioPath", getFilePath())
-        startActivity(intent)
-    }
-
     private fun checkAudioPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
@@ -72,7 +63,6 @@ class AudioActivity : AppCompatActivity() {
         numAudio++
         return file.absolutePath
     }
-
     private fun startMediaRecorder() {
         try {
             mediaRecorder = MediaRecorder().apply {  }
