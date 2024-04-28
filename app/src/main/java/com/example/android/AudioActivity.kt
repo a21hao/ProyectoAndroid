@@ -17,7 +17,6 @@ class AudioActivity : AppCompatActivity() {
     private lateinit var mediaRecorder: MediaRecorder
     private lateinit var mediaPlayer: MediaPlayer
     private var isRecording = false
-    private var doesAudioExist = false
 
     private val REQUEST_MICROPHONE = 123
 
@@ -95,11 +94,13 @@ class AudioActivity : AppCompatActivity() {
             Log.d("AudioRecorder", "Already stopped")
     }
 
-    fun play() {
-        if (!isRecording && doesAudioExist) {
+    private fun play() {
+        val filePath = getFilePath()
+        val audioFile = File(filePath)
+        if (!isRecording && audioFile.exists()) {
             try {
                 mediaPlayer = MediaPlayer()
-                mediaPlayer.setDataSource(getFilePath())
+                mediaPlayer.setDataSource(filePath)
                 mediaPlayer.prepare()
                 mediaPlayer.start()
             } catch (e: IOException) {
