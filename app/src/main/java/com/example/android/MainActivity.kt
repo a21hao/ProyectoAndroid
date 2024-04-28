@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     private val audioFilesList = mutableListOf<AudioFile>()
     private lateinit var videoRecyclerView: RecyclerView
     private lateinit var videoAdapter: VideoAdapter
-    private val videoFileList = mutableListOf<VideoFile>()
+    private val videoFilesList = mutableListOf<VideoFile>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,17 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         loadAudioFiles()
 
-        videoList = listOf(
-            VideoFile("Video 1", "path_to_video_1"),
-            VideoFile("Video 2", "path_to_video_2"),
-            VideoFile("Video 3", "path_to_video_3")
-            // Añadir más videos según sea necesario
-        )
-
         videoRecyclerView = findViewById(R.id.videoRecylerView)
-        videoAdapter = VideoAdapter(videoList)
-        videoRecyclerView.adapter = videoAdapter
+        videoAdapter = VideoAdapter(videoFilesList)
         videoRecyclerView.layoutManager = LinearLayoutManager(this)
+        videoRecyclerView.adapter = videoAdapter
+
+        loadVideoFiles()
     }
 
     private fun loadAudioFiles() {
@@ -71,6 +66,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         audioAdapter.notifyDataSetChanged()
+    }
+
+    private fun loadVideoFiles() {
+        videoFilesList.clear()
+        val dir = getExternalFilesDir(null)
+        dir?.listFiles()?.forEach { file ->
+            if (file.isFile && file.extension.equals("mp4", ignoreCase = true)) {
+                videoFilesList.add(VideoFile(file.name, file.absolutePath))
+            }
+        }
+        videoAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {

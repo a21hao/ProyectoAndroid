@@ -34,21 +34,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/audioRecylerView"
-        android:layout_width="409dp"
-        android:layout_height="496dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/addMenu"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/videoRecylerView"
-        android:layout_width="409dp"
-        android:layout_height="496dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/addMenu"
-        app:layout_constraintStart_toStartOf="parent" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/audioRecylerView">
 
     </androidx.recyclerview.widget.RecyclerView>
 

@@ -11,9 +11,14 @@ import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
 
 class VideoAdapter(private val videoFiles: List<VideoFile>) : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
+
+    private val videoViewHolders: MutableList<VideoViewHolder> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_video, parent, false)
-        return VideoViewHolder(view)
+        val holder = VideoViewHolder(view)
+        videoViewHolders.add(holder)
+        return holder
     }
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
@@ -26,14 +31,29 @@ class VideoAdapter(private val videoFiles: List<VideoFile>) : RecyclerView.Adapt
     }
 
     inner class VideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val videoView: VideoView = itemView.findViewById(R.id.videoView)
+        private var videoView: VideoView = itemView.findViewById(R.id.videoView)
+        private var mediaPlayer: MediaPlayer? = null
 
         fun bind(videoFile: VideoFile) {
-            // Set video URI to the VideoView
+            itemView.findViewById<TextView>(R.id.textViewFileName).text = videoFile.name
             videoView.setVideoURI(Uri.parse(videoFile.filePath))
+            videoView.setOnClickListener {
+                mediaPlayer = MediaPlayer()
+                mediaPlayer?.setDataSource(videoFile.filePath)
+                mediaPlayer?.prepare()
+                mediaPlayer?.start()
+            }
+        }
 
-            // Handle video playback controls (play, pause, etc.) as needed
-            // You can add listeners here to control video playback
+        fun releaseMediaPlayer() {
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
+    }
+
+    fun releaseAllMediaPlayers() {
+        for (holder in videoViewHolders) {
+            holder.releaseMediaPlayer()
         }
     }
 }
